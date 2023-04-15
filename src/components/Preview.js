@@ -6,7 +6,7 @@ import React from 'react';
  (DONE)*/ 
 import { fetchQueryResultsFromURL } from '../api';
 
-const Preview = (props) => {
+const Preview = () => {
   /**
    * Destructure setSearchResults, setFeaturedResult, and setIsLoading from props
    * and also destructure info and records from props.searchResults
@@ -33,18 +33,22 @@ const Preview = (props) => {
     }
   }
 
-  return <aside id="preview">
+  return (<aside id="preview">
     <header className="pagination">
       {/* This button should be disabled if nothing is set in info.prev, and should call fetchPage with info.prev when clicked */}
-      <button 
-        disabled={} 
-        className="previous"
-        onClick={}>Previous</button>
+      <button    className="previous">
+       {/* disabled={} 
+     
+        onClick={} */}
+       
+        Previous</button>
       {/* This button should be disabled if nothing is set in info.next, and should call fetchPage with info.next when clicked */}
       <button
-        disabled={}
+        // disabled={}
         className="next"
-        onClick={}>Next</button>
+        // onClick={}
+        >
+          Next</button>
     </header>
     <section className="results">
       {
@@ -66,7 +70,7 @@ const Preview = (props) => {
         */
       }
     </section>
-  </aside>
+  </aside>)
 }
 
 export default Preview;

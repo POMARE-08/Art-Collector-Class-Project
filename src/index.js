@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 
 
 //(DONE) These imports won't work until you fix ./components/index.js (DONE)
-import { Feature, Loading, Preview, Search, Title } from "./components";
+import { Feature, Loading, Search, Title } from "./components";
 
 const App = () => {
   /** (DONE)
@@ -15,9 +15,9 @@ const App = () => {
    * isLoading, setIsLoading (default should be false)
    (DONE)*/
 
-  const [searchResults, setSearchResults] = useState("{info:{}, []}")
-  const [featuredResult, setFeaturedResult] = useState(null)
-  const [isLoading, setIsLoading] = (false)
+  // const [searchResults, setSearchResults] = useState({info:{}, records:[]})
+  // const [featuredResult, setFeaturedResult] = useState(null)
+  // const [isLoading, setIsLoading] = (false)
 
   return (
     <div className="app">
@@ -26,11 +26,11 @@ const App = () => {
       {/* <Search /> needs props for setIsLoading and setSearchResults (trigger <Loading /> on search start/end, and transfer results to preview) */}
       <Search />
       {/* <Preview /> needs props for searchResults, setIsLoading and setSearchResults (clicking prev/next buttons), and setFeaturedResult (clicking a preview) */}
-      <Preview />
+      {/* <Preview /> */}
       {/* <Feature /> needs props for featuredResult, as well as setIsLoading and setSearchResults (clicking on searchable properties) */}
-      <Feature />
+      {/* <Feature /> */}
       {/* <Loading /> is static, but should only render when isLoading is true */}
-      <Loading /> {/* use a ternary and render null if isLoading is false */}
+      {/* <Loading /> { use a ternary and render null if isLoading is false } */}
     </div>
   );
 };

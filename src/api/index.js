@@ -3,8 +3,8 @@
  *
  * (DONE) You need to replace YOUR_API_KEY in the string associated with KEY with your actual API key (DONE)
  */
-export const BASE_URL = "https://api.harvardartmuseums.org";
-export const KEY = "apikey=64207f5f-91e4-45ca-8c4f-a5d458110f61Y";
+export const BASE_URL = 'https://api.harvardartmuseums.org';
+export const KEY = 'apikey=64207f5f-91e4-45ca-8c4f-a5d458110f61Y';
 
 /**
  * This will make a call to the API for a single term and value (e.g. "person", and "unknown"), and return the result
@@ -13,7 +13,7 @@ export async function fetchQueryResultsFromTermAndValue(term, value) {
   try {
     const response = await fetch(
       `${BASE_URL}/object?${KEY}&${term}=${encodeURI(
-        value.split("-").join("|")
+        value.split('-').join('|')
       )}`
     );
     const data = await response.json();
@@ -64,8 +64,8 @@ export async function fetchQueryResults({
  * This returns early if there are centuries stored in localStorage, or fetches them from the API and stores them in localStorage if not
  */
 export async function fetchAllCenturies() {
-  if (localStorage.getItem("centuries")) {
-    return JSON.parse(localStorage.getItem("centuries"));
+  if (localStorage.getItem('centuries')) {
+    return JSON.parse(localStorage.getItem('centuries'));
   }
 
   const url = `${BASE_URL}/century?${KEY}&size=100&sort=temporalorder`;
@@ -75,7 +75,7 @@ export async function fetchAllCenturies() {
     const data = await response.json();
     const records = data.records;
 
-    localStorage.setItem("centuries", JSON.stringify(records));
+    localStorage.setItem('centuries', JSON.stringify(records));
 
     return records;
   } catch (error) {
@@ -87,8 +87,8 @@ export async function fetchAllCenturies() {
  * This returns early if there are classifications stored in localStorage, or fetches them from the API and stores them in localStorage if not
  */
 export async function fetchAllClassifications() {
-  if (localStorage.getItem("classifications")) {
-    return JSON.parse(localStorage.getItem("classifications"));
+  if (localStorage.getItem('classifications')) {
+    return JSON.parse(localStorage.getItem('classifications'));
   }
 
   const url = `${BASE_URL}/classification?${KEY}&size=100&sort=name`;
@@ -98,12 +98,10 @@ export async function fetchAllClassifications() {
     const data = await response.json();
     const records = data.records;
 
-    localStorage.setItem("classifications", JSON.stringify(records));
+    localStorage.setItem('classifications', JSON.stringify(records));
 
     return records;
   } catch (error) {
     throw error;
   }
 }
-
-export default index;
