@@ -1,9 +1,9 @@
 import React from 'react';
 
 /**
- * We need to import fetchQueryResultsFromURL since we will sometimes have urls in info.prev and info.next
+(DONE) * We need to import fetchQueryResultsFromURL since we will sometimes have urls in info.prev and info.next
  * which are query urls.
- */
+ (DONE)*/ 
 import { fetchQueryResultsFromURL } from '../api';
 
 const Preview = (props) => {
@@ -13,7 +13,7 @@ const Preview = (props) => {
    * 
    * You need info, records, setSearchResults, setFeaturedResult, and setIsLoading as available constants
    */
-
+    
 
   /**
    * Don't touch this function, it's good to go.

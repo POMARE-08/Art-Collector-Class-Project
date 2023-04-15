@@ -8,7 +8,7 @@ You need to fix the following files:
 
 You need to set your API key!
 
-### `./index.js` and `./components/index.js`
+ ### `./index.js` and `./components/index.js` 
 
 First, the imports at the top of our root `index.js` won't work, since they aren't actually exported from `./components/index.js`. Go add 5 re-exports to that file.
 
