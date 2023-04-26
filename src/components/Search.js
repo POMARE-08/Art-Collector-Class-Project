@@ -12,6 +12,7 @@ import {
 const Search = (props) => {
   // Make sure to destructure setIsLoading and setSearchResults from the props
   // const [searchResults, setSearchResults] = useState({info:{}, []})
+  const {setIsLoading, setSearchResults} = props;
 
   /**
    * We are at the Search component, a child of app. This has a form, so we need to use useState for
@@ -26,12 +27,15 @@ const Search = (props) => {
 
 
   async function getData(){
-    const newClassificationsList = await fetchAllClassifications();
-    const newCenturyList = await fetchAllCenturies();
-      setClassificationList(newClassificationsList);
-      setCenturyList(newCenturyList);
-      console.log(newClassificationsList, newCenturyList)
-
+    try {
+      const newClassificationsList = await fetchAllClassifications();
+      const newCenturyList = await fetchAllCenturies();
+        setClassificationList(newClassificationsList);
+        setCenturyList(newCenturyList);
+        console.log(newClassificationsList, newCenturyList)
+    } catch(err) {
+      console.log(err)
+    }
   }
   /**
    * Inside of useEffect, use Promise.all([]) with fetchAllCenturies and fetchAllClassifications
@@ -41,6 +45,16 @@ const Search = (props) => {
    * Make sure to console.error on caught errors from the API methods.
    */
   useEffect(() => {
+    Promise.all([fetchAllCenturies(), fetchAllClassifications()])
+      .then(([allCenturies, allClassifications]) => {
+          setCenturyList(allCenturies);
+          setClassificationList(allClassifications);
+      })
+      .catch ((error) => {
+        return (
+          console.error(error)
+        );
+      })
     getData()
   }, []);
 
@@ -68,7 +82,15 @@ const Search = (props) => {
    * finally: call setIsLoading, set it to false
    */
   return <form id="search" onSubmit={async (event) => {
-    // write code here
+    event.preventDefault();
+          setIsLoading(true);
+          try {
+            setSearchResults(await fetchQueryResults({century, classification, queryString}));
+          } catch (error) {
+            console.error(error);
+          } finally {
+            setIsLoading(false);
+          }
   }}>
     <fieldset>
       <label htmlFor="keywords">Query</label>
@@ -86,8 +108,8 @@ const Search = (props) => {
       <select 
         name="classification"
         id="select-classification"
-        // value={/* this should be the classification */} 
-        // onChange={/* this should update the value of the classification */}
+        value={classification} 
+        onChange={(event) => setClassification(event.target.value)}
         >
         <option value="any">Any</option>
         {classificationList.map(renderList)}
@@ -98,8 +120,8 @@ const Search = (props) => {
       <select 
         name="century" 
         id="select-century"
-        // value={/* this should be the century */} 
-        // onChange={/* this should update the value of the century */}
+        value={century} 
+        onChange={(event) => setCentury(event.target.value)}
         >
         <option value="any">Any</option>
         {centuryList.map(renderList)}
