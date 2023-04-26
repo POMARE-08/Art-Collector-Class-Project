@@ -63,7 +63,7 @@ const Search = (props) => {
   }
 
   function renderList(item){
-    return <option>{item.name}</option>
+    return <option key={item.name}>{item.name}</option>
   }
   /**
    * This is a form element, so we need to bind an onSubmit handler to it which:
@@ -81,17 +81,19 @@ const Search = (props) => {
    * 
    * finally: call setIsLoading, set it to false
    */
-  return <form id="search" onSubmit={async (event) => {
+  async function handleSubmit (event) {
     event.preventDefault();
           setIsLoading(true);
-          try {
-            setSearchResults(await fetchQueryResults({century, classification, queryString}));
+          try { 
+            const result = await fetchQueryResults({century, classification, queryString})
+            console.log(result)
+            setSearchResults(result)
           } catch (error) {
             console.error(error);
           } finally {
             setIsLoading(false);
-          }
-  }}>
+          }}
+  return <form id="search" onSubmit={handleSubmit}>
     <fieldset>
       <label htmlFor="keywords">Query</label>
       <input 
